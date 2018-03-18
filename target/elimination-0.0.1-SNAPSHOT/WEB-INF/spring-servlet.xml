@@ -12,7 +12,9 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!-- 配置扫描的包 -->
-    <context:component-scan base-package="emission.nebula.fear" />
+    <context:component-scan base-package="milestone.regime.ambition" />
+    <context:component-scan base-package="interpret.clarify.prompt"></context:component-scan>
+    
 
     <!-- 注册HandlerMapper、HandlerAdapter两个映射类 -->
     <mvc:annotation-driven />
