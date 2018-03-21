@@ -3,10 +3,12 @@ package interpret.clarify.prompt;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
+
 
 public class Test {
-	public static void main(String[] args) throws IOException, InterruptedException {
+
+	public Test() throws IOException, InterruptedException {
+		System.out.println("hewll=");
 
 		try {
 			InetAddress address = InetAddress.getLocalHost();
@@ -16,11 +18,11 @@ public class Test {
 			e.printStackTrace();
 		}
 
-//		URL uri = Test.class.getResource("hub.bat");
-//		String jpg = uri.toString().substring(6);
-//		Process process = Runtime.getRuntime().exec("cmd /k start " + jpg);
-//		Thread.sleep(3000);
-//		uri = Test.class.getResource("node.bat");
-//		process = Runtime.getRuntime().exec("cmd /c start " + uri.toString().substring(6));
+		URL uri = Test.class.getResource("hub.bat");
+		String jpg = uri.toString().substring(6);
+		Process process = Runtime.getRuntime().exec("cmd /k start " + jpg);
+		uri = Test.class.getResource("node.bat");
+		Thread.sleep(3000);
+		process = Runtime.getRuntime().exec("cmd /k start " + uri.toString().substring(6));
 	}
 }

@@ -58,10 +58,6 @@ public class SaveSound {
 		// driver.close();
 	}
 
-	public static void main(String[] args) throws IOException {
-		new SaveSound().save(100,
-				"Tammy%20Bruce%20is%20a%20radio%20talk-show%20host%2C%20New%20York%20Times%20best-selling%20author%20and%20Fox%20News%20political%20contributor");
-	}
 
 	public static boolean deleteDir(File dir) {
 		if (dir.isDirectory()) {

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class Gesture {
+	
+
 	@RequestMapping("/frank")
 	public ModelAndView index(HttpSession session) {
 
@@ -66,7 +69,7 @@ public class Gesture {
 
 	@RequestMapping("/single")
 	public ModelAndView single(HttpServletRequest request, @RequestParam(value = "news_url") String url) {
-         
+
 		// String uri = request.getParameter("url");
 		WebSocketTest.url = url;
 		ModelAndView model = new ModelAndView("chinese");

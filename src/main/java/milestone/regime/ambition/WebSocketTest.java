@@ -57,13 +57,11 @@ public class WebSocketTest {
 		// }
 
 	}
-	
 
 	public WebSocketTest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	@OnOpen
 	public void onOpen() {
