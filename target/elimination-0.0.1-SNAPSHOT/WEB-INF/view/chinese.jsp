@@ -39,7 +39,7 @@ color:	Crimson
   <p id="messages"/>
   <script type="text/javascript" charset="UTF-8">
     var webSocket =
-      new WebSocket('ws://192.168.0.115:9000/elimination/websocketTest');
+      new WebSocket('ws://192.168.0.115:9000/elimination/websocketMain');
    
     webSocket.onerror = function(event) {
         onError(event)

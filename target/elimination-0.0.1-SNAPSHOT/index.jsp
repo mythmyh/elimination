@@ -13,6 +13,7 @@
 <body>
 <a href="frank">FoxNews 新闻列表</a>
 <br><br>
+<a href="stab">ABCNews 新闻列表</a><br><br>
 <form action="single">
 输入网址：<input type="text" name="news_url"><br><br>
 <input type="submit" value="提交"/>

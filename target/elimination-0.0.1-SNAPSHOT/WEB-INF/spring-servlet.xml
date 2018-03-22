@@ -13,8 +13,10 @@
 
     <!-- 配置扫描的包 -->
     <context:component-scan base-package="milestone.regime.ambition" />
-    <context:component-scan base-package="interpret.clarify.prompt"></context:component-scan>
-    
+   
+    <context:component-scan base-package="interpret.clarify.prompt">
+    </context:component-scan>
+
 
     <!-- 注册HandlerMapper、HandlerAdapter两个映射类 -->
     <mvc:annotation-driven />
