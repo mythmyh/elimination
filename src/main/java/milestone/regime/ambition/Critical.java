@@ -33,9 +33,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import interpret.clarify.prompt.DriverTest;
+import interpret.clarify.prompt.DriverMain;
 import interpret.clarify.prompt.SaveSound;
-
+//主要线程类
 public class Critical implements Runnable {
 	static AtomicInteger i = new AtomicInteger(1);
 	static HttpSession session2;
@@ -56,6 +56,9 @@ public class Critical implements Runnable {
 		// String window = "window.open('" + str + "')";
 		// ((JavascriptExecutor) dr).executeScript(window);
 		ChromeOptions option = new ChromeOptions();
+		/*
+		 * 隐藏浏览器窗口
+		 */
 		option.addArguments("headless");
 		option.addArguments("disable-infobars");
 		// option.addArguments("user-data-dir=C:\\Users\\Administrator\\AppData\\Local\\Google\\Chrome\\User
@@ -76,27 +79,31 @@ public class Critical implements Runnable {
 		// WebElement container =
 		// dr.findElement(By.className("keywords-container"));
 		// System.out.println(container.getText());
-
+         
 		String encodeString = null;
 		try {
+			//转换字符串
 			encodeString = URLEncoder.encode(eng, "utf-8").replaceAll("\\+", "%20");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-		// String window =
-		// "window.open('http://fanyi.baidu.com/?aldtype=16047#en/zh/" +
-		// encodeString + "')";
-		// ((JavascriptExecutor) driver).executeScript(window);
+	     //保存声音文件
 		SaveSound save = new SaveSound();
 		try {
 			save.save(index, encodeString);
 		} catch (IOException e3) {
 			// TODO Auto-generated catch block
-			e3.printStackTrace();
+			System.out.println("保存出错！");
 		}
 		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		try {
+	
 			driver.get("http://fanyi.baidu.com/?aldtype=16047#en/zh/" + encodeString);
 		} catch (Exception e) {
 
@@ -110,44 +117,26 @@ public class Critical implements Runnable {
 
 		}
 
-		// 排除当前窗口的句柄，则剩下是新窗口
-		// String handle = driver.getWindowHandle();
-		// System.out.println(handle);
-		// 获取所有页面的句柄，并循环判断不是当前的句柄
-		// for (String handles : driver.getWindowHandles()) {
-		// if (handles.equals(handle))
-		// continue;
-		// driver.switchTo().window(handles);
-		// System.out.println(handles);
-		// }
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[翻译即将结束！]");
-		}
+	
 		String reload = index + encodeString;
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebElement container2 = driver.findElement(By.className("target-output"));
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		// System.out.println(index + " " + container2.getText());
+	
+		// 
 		// 给重要单词上色
 		Map<String, String> couples = new HashMap<>();
 		try {
-			couples = new DriverTest().getWords(driver);
+			couples = new DriverMain().getWords(driver);
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		if (couples.size() > 0) {
+		if (couples!=null &&couples.size() > 0) {
 			for (String se : couples.keySet()) {
 				int x = i.getAndAdd(1);
 				int c = i.getAndAdd(1);
 				String jk = se.trim();
+				//处理字符串加class，js点击事件等
 				if (jk.matches("\\w+\\W\\w+")) {
 					eng = eng.replace(se,
 							"<span  class=\"ss\" id=\" " + x + "\" onclick=\"hide(this)\">" + se + "</span><span class=\"word\" id=\""

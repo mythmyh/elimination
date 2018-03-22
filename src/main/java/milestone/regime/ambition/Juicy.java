@@ -17,7 +17,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import interpret.clarify.prompt.SaveSound;
-
+//封装类，websocket打开时候启动访问
 public class Juicy {
 	Session session;
 	// static SelectDriver sd = SelectDriver.instance();
@@ -98,17 +98,19 @@ public class Juicy {
 			session.getAsyncRemote().sendText("    <p class=\"hometown\">正在扫描文章...</p>");
 		} catch (Exception e) {
 		} finally {
-
+			// foxnews换成article-body,abcnews换成artile-copy
 			WebElement element = driver.findElement(By.className("article-body"));
+			Thread.sleep(3000);
 			List<WebElement> sets = element.findElements(By.tagName("p"));
 			for (WebElement ele : sets) {
-				int p = x++;
-
-				if (ele.getText().equals(" ")) {
+			
+				// ==0是为了适配abcnews才加的
+				if (ele.getText().equals(" ") || (ele.getText().length()==0)) {
+					continue;
 				} else {
+					int p = x++;
 					map.put(p, new String(ele.getText()));
 				}
-				// System.out.println(map.get(p)+" "+ele.getText());
 			}
 
 			driver.close();
@@ -116,7 +118,6 @@ public class Juicy {
 
 		}
 
-		// System.out.println(map.toString());
 		Thread.sleep(2000);
 
 		String s = SaveSound.s + "\\webapps\\elimination\\soundtrack\\news\\";
@@ -137,23 +138,17 @@ public class Juicy {
 			System.out.println("需要" + t + "个补偿线程...");
 			Horse.ex = t;
 
-			new CarrierTest(6, map, session);
-			// barrier加速线程
+			new CarrierMain(6, map, session);
+			// // barrier加速线程
 		} else {
-			new CarrierTest(map.size(), map, session);
+			new CarrierMain(map.size(), map, session);
 		}
-
-		//
-
-		// System.out.println(element.getText());
-		// 关闭浏览器
-		// driver.quit();
-		// 关闭 ChromeDriver 接口
+	
 	}
 
 	public Juicy(Session session) {
 		super();
 		this.session = session;
 	}
-}
+	}
 

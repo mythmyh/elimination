@@ -1,5 +1,5 @@
 package interpret.clarify.prompt;
-
+//保存声音文件
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,8 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class SaveSound {
-
-	public static String s = System.getenv("catalina_home");
+    	public static String s = System.getenv("catalina_home");
 
 	public SaveSound() {
 		super();
@@ -29,7 +28,7 @@ public class SaveSound {
 
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		// 设置超时间为3秒
-		conn.setConnectTimeout(4 * 1000);
+		conn.setConnectTimeout(3 * 1000);
 		// 防止屏蔽程序抓取而返回403错误
 
 		// 得到输入流
@@ -49,7 +48,6 @@ public class SaveSound {
 
 		FileOutputStream output = new FileOutputStream(soundtrack);
 		output.write(sound);
-		System.out.print(soundtrack.getAbsolutePath());
 		in.close();
 		output.close();
 
