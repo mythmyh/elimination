@@ -3,3 +3,4 @@
 2：需要合适的chromedriver和chrome，chromedriver版本自己百度一下
 
 3：修改/view/chinese.jsp中的ip地址和端口
+    new WebSocket('ws://192.168.0.115:9000/elimination/websocketMain');
